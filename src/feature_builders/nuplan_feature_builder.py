@@ -28,7 +28,7 @@ from nuplan.planning.training.preprocessing.features.abstract_model_feature impo
 from ..features.nuplan_feature import NuplanFeature
 from .common.route_utils import route_roadblock_correction
 from .common.utils import interpolate_polyline, rotate_round_z_axis
-
+from ..vis.feature_visualize import visualize_agent_features, visualize_map_features
 
 class NuplanFeatureBuilder(AbstractFeatureBuilder):
     def __init__(
@@ -297,6 +297,16 @@ class NuplanFeatureBuilder(AbstractFeatureBuilder):
                         agent.tracked_object_type
                     )
 
+        # visualize_agent_features(
+        #     position=position,
+        #     velocity=velocity,
+        #     shape=shape,
+        #     category=category,
+        #     valid_mask=valid_mask,
+        #     present_idx=present_idx,
+        #     query_xy=query_xy,
+        #     radius=self.radius,
+        # )
         return {
             "position": position,
             "heading": heading,
@@ -421,6 +431,16 @@ class NuplanFeatureBuilder(AbstractFeatureBuilder):
             polygon_tl_status[idx] = TrafficLightStatusType.UNKNOWN
             polygon_has_speed_limit[idx] = False
 
+        # visualize_map_features(
+        #     point_position=point_position,
+        #     point_vector=point_vector, 
+        #     polygon_center=polygon_center,
+        #     polygon_type=polygon_type,
+        #     polygon_on_route=polygon_on_route,
+        #     polygon_tl_status=polygon_tl_status,
+        #     query_xy=query_xy,
+        #     radius=radius
+        # )
         return {
             "point_position": point_position,
             "point_vector": point_vector,
