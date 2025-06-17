@@ -10,6 +10,7 @@ hydra:
     - config/scenario_filter
 
 defaults:
+  - _self_
   # Add ungrouped items
   - default_experiment
   - default_common

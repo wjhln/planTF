@@ -9,6 +9,7 @@ hydra:
     - config/training
 
 defaults:
+  - _self_
   - default_experiment
   - default_common
 

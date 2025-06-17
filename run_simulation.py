@@ -38,9 +38,15 @@ def print_simulation_results(file=None):
     else:
         root = Path(os.getcwd()) / "aggregator_metric"
         result = list(root.glob("*.parquet"))
+        if not result:
+            logger.warning("No simulation result files found in aggregator_metric directory. Simulation may not have completed successfully.")
+            return
         result = max(result, key=lambda item: item.stat().st_ctime)
         df = pd.read_parquet(result)
     final_score = df[df["scenario"] == "final_score"]
+    if final_score.empty:
+        logger.warning("No final_score found in simulation results.")
+        return
     final_score = final_score.to_dict(orient="records")[0]
     pprint.PrettyPrinter(indent=4).pprint(final_score)
 
